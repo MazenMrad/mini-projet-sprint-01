@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <tr><th>Id</th><th>Nom</th><th>Prix</th><th>Date Creation</th><th>Type</th></tr>
+        @for (book of books; track book.idBook)
+        {
+          <tbody>
+            <tr>
+              <td>{{book.idBook}}</td>
+              <td>{{book.nomBook}}</td>
+              <td>{{book.prixBook}}</td>
+              <td>{{book.dateCreation | date:'dd/MM/yyyy'}}</td>
+              @if(book.type){
+                <td>{{book.type.nomType}}</td> }
+              @else {
+                <td>PAS DE TYPE</td>
+              }
+              @if (authService.isAdmin()) {
+                <td><a class="btn btn-danger" (click)="supprimerBook(book)">Supprimer</a></td>
+                <td><a class="btn btn-success" [routerLink]="['/updateBook', book.idBook]">Modifier</a></td>
+              }
+            </tr>
+          </tbody>
+        }
+      </table>
+    </div>
+  </div>
+</div>
